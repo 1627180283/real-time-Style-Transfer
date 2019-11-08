@@ -1,0 +1,5 @@
+This folder is used to save training images. All images should under this folder.
+I choose Pascal VOC 2012 as training set. You can choose Microsoft COCO, too.
+
+这个文件夹用于保存训练的数据集。 所有的训练图片应该被保存在这个文件夹下。
+我选择Pascal VOC 2012 作为我的训练集。 你也可以和论文保持一致，选择Microsoft COCO。
