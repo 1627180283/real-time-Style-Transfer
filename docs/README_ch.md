@@ -26,7 +26,15 @@ ___video___
 | --------   | -----:  | :----:  |
 | udnie      |[google drive](https://drive.google.com/open?id=1-L5EDBd5ELevrNok0gpSKqVvkcd6dp1y)   |   [google drive](https://drive.google.com/open?id=1BbHY4n1dxb8ACJToypK9NGFLyE1_E4D-)     |
 
-Later, we will provide more style model.
+之后我们会提供更多的模型。
+
+<br>
+
+**模型结构**
+
+![architecture](./imgs/model_architecture_ch.png)
+
+<br>
 
 **需要的环境**
 

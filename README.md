@@ -26,6 +26,14 @@ style video（run it on Snapdragon845）
 | --------   | -----:  | :----:  |
 | udnie      |[google drive](https://drive.google.com/open?id=1-L5EDBd5ELevrNok0gpSKqVvkcd6dp1y)   |   [google drive](https://drive.google.com/open?id=1BbHY4n1dxb8ACJToypK9NGFLyE1_E4D-)     |
 
+<br>
+
+**Model architecture**
+
+![architecture](./imgs/model_architecture.png)
+
+<br>
+
 **Requirements**
 
 You will need the following to run this project:
