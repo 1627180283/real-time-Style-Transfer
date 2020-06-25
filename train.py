@@ -68,6 +68,8 @@ def trainer(args):
     style_gram = [utils.gram(fmap) for fmap in style_features]
 
     print("Start training. . .")
+    best_style_loss = 1e9
+    best_content_loss = 1e9
     for e in range(args.epoch):
 
         # track values for...
@@ -140,15 +142,22 @@ def trainer(args):
         if not os.path.exists("models/{}" .format(model_folder)):
             os.makedirs("models/{}" .format(model_folder))
         num = len(train_dataset) / args.batch_size
-        filename = "models/{}/{}_epoch={}_style={:.4f}_content={:.4f}_tv={:.4f}.pth" .format(
-            model_folder,
-            style_name,
-            e + 1,
-            aggregate_style_loss / num,
-            aggregate_content_loss / num,
-            aggregate_tv_loss / num)
-        torch.save(image_transformer.state_dict(), filename)
 
+        aggregate_style_loss /= num
+        aggregate_content_loss /= num
+        aggregate_tv_loss /= num
+
+        filename = "models/{}/{}_epoch={}_style={:.4f}_content={:.4f}_tv={:.4f}.pth" .format(
+            model_folder, style_name, e + 1, aggregate_style_loss,
+            aggregate_content_loss, aggregate_tv_loss)
+
+        if aggregate_style_loss < best_style_loss or aggregate_content_loss < best_content_loss:
+            torch.save(image_transformer.state_dict(), filename)
+
+        if aggregate_style_loss < best_style_loss:
+            best_style_loss = aggregate_style_loss
+        if aggregate_content_loss < best_content_loss:
+            best_content_loss = aggregate_content_loss
 
 def main():
     parser = argparse.ArgumentParser(description='style transfer in pytorch')
@@ -160,8 +169,7 @@ def main():
     parser.add_argument("--style_image", type=str, default="./style_imgs/udnie.jpg",
                           help="path to a style image to train")
 
-    parser.add_argument("--VGG_path", type=str, default="./pretrain_models/vgg16.pth",
-                        help="VGG save path")
+    parser.add_argument("--VGG_path", type=str, default=None, help="VGG save path")
 
     parser.add_argument("--image_height", type=int, default=256,
                         help="image's height, which will be fed into model")
