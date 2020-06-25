@@ -6,8 +6,11 @@ from torchvision import models
 class Vgg16(nn.Module):
     def __init__(self, path):
         super(Vgg16, self).__init__()
-        model = models.vgg16(pretrained=False)
-        model.load_state_dict(torch.load(path))
+        if path is None:
+            model = models.vgg16(pretrained=False)
+        else:
+            model = models.vgg16(pretrained=False)
+            model.load_state_dict(torch.load(path))
         features = model.features
         self.to_relu_1_2 = nn.Sequential() 
         self.to_relu_2_2 = nn.Sequential() 
