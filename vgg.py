@@ -7,7 +7,7 @@ class Vgg16(nn.Module):
     def __init__(self, path):
         super(Vgg16, self).__init__()
         if path is None:
-            model = models.vgg16(pretrained=False)
+            model = models.vgg16(pretrained=True)
         else:
             model = models.vgg16(pretrained=False)
             model.load_state_dict(torch.load(path))
